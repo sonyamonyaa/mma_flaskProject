@@ -1,59 +1,26 @@
-{% extends "base.html" %}
+{% extends "algo_layout.html" %}
 
-{% block mycontents %}
+{% block about_content %}
 <!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-third">
-            <h1>Divide and Choose for Three</h1>
-            <p class="w3-text-grey">
-                A person partitions the items to 3 bundles, using approximate leximin-n-partition,
-                and gives his peers the choice. When there are no conflicts, each of the two gets their favorite bundle.
-                If there are conflicts, another person takes his favorite bundles (the
-                third bundle goes to the first person) and partitions them (again with approximate leximin-n-partition)
-                as the third member gets to choose his favorite bundle and the remaining onw goes to
-            </p>
-        </div>
+<h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents using approximate leximin n-partition.</h5>
+<p>
+    MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item only.
+</p>
+<p>
+    A leximin n-partition maximizes the minimum value over all possible n partitions,
+    and if there is a tie it selects the one maximizing the second minimum value, and so on.
+</p>
+<p class="w3-text-grey">
+    We use approximate version of leximin n-partition, where it maximizes the minimum sum value of a bundle.
+</p>
+{% endblock %}
 
-        <div class="w3-twothird">
-            <h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents.</h5>
-            <p class="w3-text-grey">
-                MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item only.
-            </p>
-            <p class="w3-text-grey">
-                A leximin n-partition maximizes the minimum value over all possible n partitions,
-                and if there is a tie it selects the one maximizing the second minimum value, and so on.
-            </p>
-
-        </div>
-    </div>
-</div>
-
-<!-- Second Grid -->
-<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-third">
-            <h1>Allocation by Matching</h1>
-            <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
-        </div>
-
-        <div class="w3-twothird">
-            <h1>Allocation by Matching</h1>
-            <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-            <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-    </div>
-</div>
-
+{% block how_content %}
+<p class="w3-text-grey">
+    Alice, Bob, and Claire have some items they want to share. Each values the items differently.
+    First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
+    and lets Alice and Bob choose first. She keeps whatever is left after they decide.
+    If there are any disputes among the two, Bob will split the bundles he prefers and
+    allow Alice to select her bundle first.
+</p>
 {% endblock %}
