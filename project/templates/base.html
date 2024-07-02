@@ -1,30 +1,20 @@
 <!DOCTYPE html>
+<!--suppress JSUnresolvedLibraryURL -->
 <html lang="en">
 <head>
-    {% if title %}
-    <title>{{title}}</title>
-    {% else %}
-    <title>Page </title>
-    {% endif %}
-<!--    <title>MMA Showcase</title>-->
+    <title>W3.CSS Template</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--suppress JSUnresolvedLibraryURL -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!--suppress JSUnresolvedLibraryURL -->
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-
-    <!--suppress JSUnresolvedLibraryURL -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
-    <!--<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <!--fix "GET /favicon.ico HTTP/1.1" 404 -->
     <link rel="shortcut icon" href="#">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
+    {{ dropzone.load_css() }}
 
     <style>
         body, h1, h2, h3, h4, h5, h6 {
@@ -35,68 +25,238 @@
             font-family: "Montserrat", sans-serif
         }
 
-        .fa-anchor, .fa-diagram-project {
-            font-size: 200px
+        .dropzone {
+            color: #000;
+            background-color: #e9fffd;
+
+            :hover {
+                border-color: #009688
+            }
+        ;
+            margin-top: 16px;
+            margin-bottom: 16px
         }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<div class="w3-top">
-    <div class="w3-bar w3-teal w3-card w3-left-align w3-large">
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-teal"
-           href="javascript:void(0);" onclick="toggleMenuOnSmall()" title="Toggle Navigation Menu"><i
-                class="fa fa-bars"></i></a>
-        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-teal w3-hover-white">Home</a>
-        <a href="/divide-and-choose" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Divide and Choose</a>
-        <a href="/allocation-by-matching" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Allocation By
-            Matching</a>
-        <!--    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 3</a>-->
-        <!--    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 4</a>-->
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+        <h4>Algorithms showcase</h4>
+        <h1 class="w3-xxxlarge w3-animate-bottom">Maximin Aware</h1>
+        <!--        <div class="w3-padding-32">-->
+        <!--            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"-->
+        <!--                    onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">LEARN-->
+        <!--                W3.CSS-->
+        <!--            </button>-->
+        <!--        </div>-->
     </div>
+</header>
 
-    <!-- Navbar on small screens -->
-    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-        <a href="/divide-and-choose" class="w3-bar-item w3-button w3-padding-large">Divide and Choose</a>
-        <a href="/allocation-by-matching" class="w3-bar-item w3-button w3-padding-large">Allocation By Matching</a>
+
+<!-- Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-top">
+        <header class="w3-container w3-theme-l1">
+        <span onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright">×</span>
+            <h4>Oh snap! We just showed you a modal..</h4>
+            <h5>Because we can <i class="fa fa-smile-o"></i></h5>
+        </header>
+        <div class="w3-padding">
+            <p>Cool huh? Ok, enough teasing around..</p>
+            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+        </div>
+        <footer class="w3-container w3-theme-l1">
+            <p>Modal footer</p>
+        </footer>
     </div>
 </div>
 
-<!-- Header -->
-<header class="w3-container w3-teal w3-center" style="padding:128px 16px">
-    {% if head %}
-    <h1 class="w3-margin w3-jumbo">{{head}}</h1>
-    {% else %}
-    <h1 class="w3-margin w3-jumbo">Page Content</h1>
-    {% endif %}
-    {%if sub_title %}
-    <p class="w3-xlarge">{{sub_title}}</p>
-    {% endif %}
-</header>
+<div class="w3-row-padding w3-center w3-light-grey w3-padding-16">
+    <h1 class="w3-margin w3-xlarge">Maximin Aware (MMA) - There is always somebody who gets no more
+        than you </h1>
 
-{% block mycontents %}
-{% endblock %}
+</div>
 
+
+<div class="w3-container">
+    <hr>
+    <h2 class="w3-center">Tabs</h2>
+    <div class="w3-border">
+        <div class="w3-bar w3-theme">
+            <button class="w3-half w3-button testbtn w3-padding-16" onclick="openAlgo(event,'DnC')">Divide and Choose
+            </button>
+            <button class="w3-half w3-button testbtn w3-padding-16" onclick="openAlgo(event,'AbM')">Allocation by
+                Matching
+            </button>
+            <!--            <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'Tokyo')">Tokyo</button>-->
+        </div>
+
+        <div id="DnC" class="w3-container algo w3-animate-opacity">
+            <h2>Divide and Choose</h2>
+            <p>
+                Finds an item allocation for three people where one divides the items and gives the choice to his
+                peers.
+            </p>
+            <button onclick="myAccFunc('info1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
+                About
+            </button>
+            <div id="info1" class="w3-hide">
+                <div class="w3-container">
+                    <h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents using approximate leximin
+                        n-partition.</h5>
+                    <p>
+                        MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item
+                        only.
+                    </p>
+                    <p>
+                        A leximin n-partition maximizes the minimum value over all possible n partitions,
+                        and if there is a tie it selects the one maximizing the second minimum value, and so on.
+                    </p>
+                    <hr>
+                    <p class="w3-text-grey">
+                        We use approximate version of leximin n-partition, where it maximizes the minimum sum value of a
+                        bundle.
+                    </p>
+                </div>
+            </div>
+            <button onclick="myAccFunc('how1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
+                How it Works
+            </button>
+            <div id="how1" class="w3-hide">
+                <div class="w3-container">
+                    <p>
+                        Alice, Bob, and Claire have some items they want to share. Each values the items differently.
+                        First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
+                        and lets Alice and Bob choose first. She keeps whatever is left after they decide.
+                        If there are any disputes among the two, Bob will split the bundles he prefers and
+                        allow Alice to select her bundle first.
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="AbM" class="w3-container algo w3-animate-opacity">
+            <h2>Allocation by Matching</h2>
+            <p>Finds an item allocation for any amount of people using maximum matching in graphs.</p>
+            <button onclick="myAccFunc('info2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
+                About
+            </button>
+            <div id="info2" class="w3-hide">
+                <div class="w3-container">
+                    <h5 class="w3-padding-16">Finds an 1/2MMA allocation for any amount of agents using maximum weight
+                        matching in graphs and envy reduction procedure.</h5>
+                    <p>
+                        1/2MMA - Maximin aware by half. Your bundle will always be worth at least half as much as the
+                        remaining items.
+                    </p>
+                    <p>
+                        A matching in a graph is a set of edges without common vertices. Maximum weight matching is a
+                        matching that maximises the weight of the edges.
+                    </p>
+                    <p class="w3-text-grey">
+                        The envy reduction procedure finds who is envious of whom. If there's a cycle of envy,
+                        it swaps the bundles so each envious person gets the bundle they want.
+                    </p>
+                </div>
+            </div>
+            <button onclick="myAccFunc('how2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
+                How it Works
+            </button>
+            <div id="how2" class="w3-hide">
+                <div class="w3-container">
+                    <p>
+                        Alice, Bob, and Claire have some items they want to share. Each values the items differently.
+                        First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
+                        and lets Alice and Bob choose first. She keeps whatever is left after they decide.
+                        If there are any disputes among the two, Bob will split the bundles he prefers and
+                        allow Alice to select her bundle first.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="w3-container w3-padding-32">
+    <div class="w3-container">
+        <h2 class="w3-center">Try it Yourself</h2>
+        <p>
+            Choose an algorithm and upload a .csv file
+        </p>
+
+        <select class="w3-select" name="option">
+            <option value="" disabled selected>Choose Algorithm</option>
+            <option value="1">Divide and Choose</option>
+            <option value="2">Allocation by Matching</option>
+        </select>
+
+        {{ dropzone.create('/') }}
+        <button id="upload">Upload</button>
+
+        {{ dropzone.load_js() }}
+        {{ dropzone.config() }}
+        {# You can get the success response from server like this: #}
+        {#{ dropzone.config(custom_options="success: function(file, response){console.log(response);}") }#}
+    </div>
+
+</div>
+<br>
 
 <!-- Footer -->
-<footer class="w3-container w3-padding-32 w3-center w3-theme-dark w3-opacity">
-    <div class="w3-xlarge w3-padding-32">
-<!--        <link rel="icon" href="data:,">-->
-        <i class="fa fa-github w3-hover-opacity"></i>
-        <!--        <i class="fa fa-instagram w3-hover-opacity"></i>-->
-        <!--        <i class="fa fa-snapchat w3-hover-opacity"></i>-->
-        <!--        <i class="fa fa-pinterest-p w3-hover-opacity"></i>-->
-        <!--        <i class="fa fa-twitter w3-hover-opacity"></i>-->
-        <!--        <i class="fa fa-linkedin w3-hover-opacity"></i>-->
+<footer class="w3-container w3-padding-16 w3-theme-dark">
+    <div class="w3-center">
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
     </div>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+
+    <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+        <span class="w3-text w3-theme-light w3-padding">Go To Top</span>
+        <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+    </div>
 </footer>
 
+<!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
+
 <script>
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function toggleMenuOnSmall() {
-        var x = document.getElementById("navDemo");
+    // Side navigation
+    function w3_open() {
+        var x = document.getElementById("mySidebar");
+        x.style.width = "100%";
+        x.style.fontSize = "40px";
+        x.style.paddingTop = "10%";
+        x.style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+
+    // Tabs
+    function openAlgo(evt, cityName) {
+        var i;
+        var x = document.getElementsByClassName("algo");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        var activebtn = document.getElementsByClassName("testbtn");
+        for (i = 0; i < x.length; i++) {
+            activebtn[i].className = activebtn[i].className.replace(" w3-dark-grey", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-dark-grey";
+    }
+
+    var mybtn = document.getElementsByClassName("testbtn")[0];
+    mybtn.click();
+
+    // Accordions
+    function myAccFunc(id) {
+        var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") === -1) {
             x.className += " w3-show";
         } else {
@@ -104,7 +264,7 @@
         }
     }
 
-</script>
 
+</script>
 </body>
 </html>
