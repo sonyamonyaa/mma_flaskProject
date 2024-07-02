@@ -22,24 +22,29 @@
     <div class="w3-content">
         <div class="w3-third">
             <h1>Try It Yourself</h1>
-            <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            {% block upload_block %}
+            {% endblock %}
         </div>
 
         <div class="w3-twothird">
             <h1>Instructions</h1>
-            <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <h5 class="w3-padding-32"> Upload a .csv file containing the valuations</h5>
 
-            <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="w3-text-grey"> Follow the example below, by adding
+                as anything in quotation marks can be changed to other names.
+            </p>
+
+            <div class="w3-border">
+            <h5 class="w3-padding-32">Example</h5>
+                <p>
+                    name,"item1","item2","item z","car",... <br>
+                    "Player 1",1,2,3,4,... <br>
+                    "Player 2",1,2,3,4,... <br>
+                    "Alice",2,2,3,4,...    <br>
+                </p>
+            </div>
+            {% block info %}
+            {% endblock %}
         </div>
     </div>
 </div>
