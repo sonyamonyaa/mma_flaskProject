@@ -42,43 +42,15 @@
 
 <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
-    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
     <div class="w3-center">
         <h4>Algorithms showcase</h4>
         <h1 class="w3-xxxlarge w3-animate-bottom">Maximin Aware</h1>
-        <!--        <div class="w3-padding-32">-->
-        <!--            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"-->
-        <!--                    onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">LEARN-->
-        <!--                W3.CSS-->
-        <!--            </button>-->
-        <!--        </div>-->
     </div>
 </header>
-
-
-<!-- Modal -->
-<div id="id01" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-top">
-        <header class="w3-container w3-theme-l1">
-        <span onclick="document.getElementById('id01').style.display='none'"
-              class="w3-button w3-display-topright">×</span>
-            <h4>Oh snap! We just showed you a modal..</h4>
-            <h5>Because we can <i class="fa fa-smile-o"></i></h5>
-        </header>
-        <div class="w3-padding">
-            <p>Cool huh? Ok, enough teasing around..</p>
-            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
-        </div>
-        <footer class="w3-container w3-theme-l1">
-            <p>Modal footer</p>
-        </footer>
-    </div>
-</div>
 
 <div class="w3-row-padding w3-center w3-light-grey w3-padding-16">
     <h1 class="w3-margin w3-xlarge">Maximin Aware (MMA) - There is always somebody who gets no more
         than you </h1>
-
 </div>
 
 
@@ -96,104 +68,30 @@
         </div>
 
         <div id="DnC" class="w3-container algo w3-animate-opacity">
-            <h2>Divide and Choose</h2>
-            <p>
-                Finds an item allocation for three people where one divides the items and gives the choice to his
-                peers.
-            </p>
-            <button onclick="myAccFunc('info1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-                About
-            </button>
-            <div id="info1" class="w3-hide">
-                <div class="w3-container">
-                    <h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents using approximate leximin
-                        n-partition.</h5>
-                    <p>
-                        MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item
-                        only.
-                    </p>
-                    <p>
-                        A leximin n-partition maximizes the minimum value over all possible n partitions,
-                        and if there is a tie it selects the one maximizing the second minimum value, and so on.
-                    </p>
-                    <hr>
-                    <p class="w3-text-grey">
-                        We use approximate version of leximin n-partition, where it maximizes the minimum sum value of a
-                        bundle.
-                    </p>
-                </div>
-            </div>
-            <button onclick="myAccFunc('how1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-                How it Works
-            </button>
-            <div id="how1" class="w3-hide">
-                <div class="w3-container">
-                    <p>
-                        Alice, Bob, and Claire have some items they want to share. Each values the items differently.
-                        First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
-                        and lets Alice and Bob choose first. She keeps whatever is left after they decide.
-                        If there are any disputes among the two, Bob will split the bundles he prefers and
-                        allow Alice to select her bundle first.
-                    </p>
-                </div>
-            </div>
-
-
+            {% include "algo1.html" %}
         </div>
         <div id="AbM" class="w3-container algo w3-animate-opacity">
-            <h2>Allocation by Matching</h2>
-            <p>Finds an item allocation for any amount of people using maximum matching in graphs.</p>
-            <button onclick="myAccFunc('info2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-                About
-            </button>
-            <div id="info2" class="w3-hide">
-                <div class="w3-container">
-                    <h5 class="w3-padding-16">Finds an 1/2MMA allocation for any amount of agents using maximum weight
-                        matching in graphs and envy reduction procedure.</h5>
-                    <p>
-                        1/2MMA - Maximin aware by half. Your bundle will always be worth at least half as much as the
-                        remaining items.
-                    </p>
-                    <p>
-                        A matching in a graph is a set of edges without common vertices. Maximum weight matching is a
-                        matching that maximises the weight of the edges.
-                    </p>
-                    <p class="w3-text-grey">
-                        The envy reduction procedure finds who is envious of whom. If there's a cycle of envy,
-                        it swaps the bundles so each envious person gets the bundle they want.
-                    </p>
-                </div>
-            </div>
-            <button onclick="myAccFunc('how2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-                How it Works
-            </button>
-            <div id="how2" class="w3-hide">
-                <div class="w3-container">
-                    <p>
-                        Alice, Bob, and Claire have some items they want to share. Each values the items differently.
-                        First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
-                        and lets Alice and Bob choose first. She keeps whatever is left after they decide.
-                        If there are any disputes among the two, Bob will split the bundles he prefers and
-                        allow Alice to select her bundle first.
-                    </p>
-                </div>
-            </div>
+            {% include "algo2.html" %}
         </div>
         <hr>
     </div>
 </div>
 <div class="w3-container w3-padding-32">
+    <h2 class="w3-center">Try it Yourself</h2>
     <div class="w3-container">
-        <h2 class="w3-center">Try it Yourself</h2>
         <p>
-            Choose an algorithm and upload a .csv file
+            Choose an algorithm and upload a .csv file.
         </p>
-
-        <select class="w3-select" name="option">
-            <option value="" disabled selected>Choose Algorithm</option>
-            <option value="1">Divide and Choose</option>
-            <option value="2">Allocation by Matching</option>
-        </select>
+        <button onclick="document.getElementById('example').style.display='block'"
+                class="w3-button w3-theme-dark"> See Example
+        </button>
+        <div class="w3-container">
+            <select class="w3-select w3-center" name="algo_option" style="width: 25%">
+                <option value="" disabled selected>Choose Algorithm</option>
+                <option value="div">Divide and Choose</option>
+                <option value="alloc">Allocation by Matching</option>
+            </select>
+        </div>
 
         {{ dropzone.create('/') }}
         <button id="upload">Upload</button>
@@ -206,6 +104,27 @@
 
 </div>
 <br>
+
+<!-- Modal -->
+<div id="example" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-top">
+        <header class="w3-container w3-theme-l1">
+        <span onclick="document.getElementById('example').style.display='none'"
+              class="w3-button w3-display-topright">×</span>
+            <h4>Oh snap! We just showed you a modal..</h4>
+            <h5>Because we can </h5>
+        </header>
+        <div class="w3-padding">
+            <p>Cool huh? Ok, enough teasing around..</p>
+            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+        </div>
+        <footer class="w3-container w3-theme-l1">
+            <button id="download_exm" onclick="downloadCSV('project/Upload/example_do_not_touch.csv')">download
+                example
+            </button>
+        </footer>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="w3-container w3-padding-16 w3-theme-dark">
@@ -220,22 +139,7 @@
     </div>
 </footer>
 
-<!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
-
 <script>
-    // Side navigation
-    function w3_open() {
-        var x = document.getElementById("mySidebar");
-        x.style.width = "100%";
-        x.style.fontSize = "40px";
-        x.style.paddingTop = "10%";
-        x.style.display = "block";
-    }
-
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-
     // Tabs
     function openAlgo(evt, cityName) {
         var i;
@@ -259,11 +163,14 @@
         var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") === -1) {
             x.className += " w3-show";
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace("w3-theme", "w3-theme-light");
         } else {
             x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace("w3-theme-light", "w3-theme");
         }
     }
-
 
 </script>
 </body>
