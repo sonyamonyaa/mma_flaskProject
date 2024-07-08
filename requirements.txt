@@ -1,2 +1,6 @@
 flask
-flask_dropzone
+
+python-dotenv
+WTForms
+fairpyx
+prtpy

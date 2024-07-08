@@ -1,0 +1,55 @@
+<form method="POST" class="w3-container" action="{{ url_for('index') }}#form-section">
+    {{ input_form.hidden_tag() }}
+    <div class="w3-margin-bottom">
+        <label>{{ input_form.algo_name.label }}</label>
+        {{ input_form.algo_name(class='w3-select w3-center') }}
+    </div>
+    <div class="w3-margin-bottom">
+        <label>{{ input_form.participants.label }}</label>
+        {{ input_form.participants(class='w3-input w3-border') }}
+    </div>
+    <div class="w3-margin-bottom">
+        <label>{{ input_form.items.label }}</label>
+        {{ input_form.items(class='w3-input w3-border') }}
+    </div>
+    {{ input_form.submit(class="w3-button w3-theme-dark w3-margin-bottom") }}
+</form>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<!-- Dynamic forms for participants and items -->
+{% if participants and items %}
+    <div class="w3-container" id="add-values">
+        <h2 class="w3-margin-top">Fill Values for Each Item</h2>
+        <form method="POST" action="{{ url_for('submit') }}" class="w3-container">
+
+            <input type="hidden" name="algo_name" value="{{ algo_name }}">
+            <input type="hidden" name="participants" value="{{ participants|join(',') }}">
+            <input type="hidden" name="items" value="{{ items|join(',') }}">
+
+            {% for participant in participants %}
+                <div class="w3-margin-top w3-padding w3-border">
+                    <h3>{{ participant }}</h3>
+                    {% for item in items %}
+                        <div class="w3-padding">
+                            <label for="{{ participant }}_{{ item }}">
+                                {{ item }}:
+                                <input type="number" name="{{ participant }}_{{ item }}" class="w3-input w3-border"
+                                   min="0" required>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="w3-button w3-green w3-margin-top">Submit All Values</button>
+        </form>
+    </div>
+{% endif %}
