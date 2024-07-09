@@ -1,39 +1,38 @@
-<h2>Allocation by Matching</h2>
-<p>Finds an item allocation for any amount of people using maximum matching in graphs.</p>
-<button onclick="myAccFunc('info2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-    About
-    <i class="fa fa-chevron-down w3-xlarge w3-right"></i>
-</button>
-<div id="info2" class="w3-hide">
-    <div class="w3-container">
-        <h5 class="w3-padding-16">Finds an 1/2MMA allocation for any amount of agents using maximum weight
-            matching in graphs and envy reduction procedure.</h5>
-        <p>
-            1/2MMA - Maximin aware by half. Your bundle will always be worth at least half as much as the
-            remaining items.
-        </p>
-        <p>
-            A matching in a graph is a set of edges without common vertices. Maximum weight matching is a
-            matching that maximises the weight of the edges.
-        </p>
-        <p class="w3-text-grey">
-            The envy reduction procedure finds who is envious of whom. If there's a cycle of envy,
-            it swaps the bundles so each envious person gets the bundle they want.
-        </p>
-    </div>
-</div>
-<button onclick="myAccFunc('how2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-    How it Works
-    <i class="fa fa-chevron-down w3-xlarge w3-right"></i>
-</button>
-<div id="how2" class="w3-hide">
-    <div class="w3-container">
-        <p>
-            Alice, Bob, and Claire have some items they want to share. Each values the items differently.
-            First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
-            and lets Alice and Bob choose first. She keeps whatever is left after they decide.
-            If there are any disputes among the two, Bob will split the bundles he prefers and
-            allow Alice to select her bundle first.
-        </p>
-    </div>
-</div>
+{% extends "algo_layout.html" %}
+
+{# id definitions #}
+{% set algo_id = "algo2" %}
+
+{% block brief_desc %}
+    <h2>Allocation by Matching</h2>
+    <p>Finds an item allocation for any amount of people using maximum matching in graphs.</p>
+{% endblock %}
+
+{% block about_content %}
+    <h5 class="w3-padding-16">Finds an 1/2MMA allocation for any amount of agents using maximum weight
+        matching in graphs and envy reduction procedure.</h5>
+    <p>
+        1/2MMA - Maximin aware by half. Your bundle will always be worth at least half as much as the
+        remaining items.
+    </p>
+    <hr>
+    <p>
+        A matching in a graph is a set of edges without common vertices. Maximum weight matching is a
+        matching that maximises the weight of the edges.
+    </p>
+    <p>
+        The envy reduction procedure finds who is envious of whom. If there's a cycle of envy,
+        it swaps the bundles so each envious person gets the bundle they want.
+    </p>
+{% endblock %}
+
+{% block how_content %}
+    <p>
+        We look for the maximum weight matching between all participants and items, based on the participants'
+        evaluations. <br>
+        After identifying a matching, each item is allocated accordingly and removed from the list of items. <br>
+        Next, we invoke the envy reduction procedure and adjust the allocation if necessary. <br>
+        Finally, we focus on participants who are not envied and repeat the process until no items remain.
+    </p>
+{% endblock %}
+

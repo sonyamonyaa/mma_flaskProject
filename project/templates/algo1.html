@@ -1,45 +1,41 @@
-<h2>Divide and Choose</h2>
-<p>
-    Finds an item allocation for three people where one divides the items and gives the choice to his
-    peers.
-</p>
-<button onclick="myAccFunc('info1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-    About
-    <i class="fa fa-chevron-down w3-xlarge w3-right"></i>
-</button>
+{% extends "algo_layout.html" %}
 
-<div id="info1" class="w3-hide">
-    <div class="w3-container">
-        <h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents using approximate leximin
-            n-partition.</h5>
-        <p>
-            MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item
-            only.
-        </p>
-        <p>
-            A leximin n-partition maximizes the minimum value over all possible n partitions,
-            and if there is a tie it selects the one maximizing the second minimum value, and so on.
-        </p>
-        <hr>
-        <p class="w3-text-grey">
-            We use approximate version of leximin n-partition, where it maximizes the minimum sum value of a
-            bundle.
-        </p>
-    </div>
-</div>
+{# id definitions #}
+{% set algo_id = "algo1" %}
 
-<button onclick="myAccFunc('how1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">
-    How it Works
-    <i class="fa fa-chevron-down w3-xlarge w3-right"></i>
-</button>
-<div id="how1" class="w3-hide">
-    <div class="w3-container">
-        <p>
-            Alice, Bob, and Claire have some items they want to share. Each values the items differently.
-            First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
-            and lets Alice and Bob choose first. She keeps whatever is left after they decide.
-            If there are any disputes among the two, Bob will split the bundles he prefers and
-            allow Alice to select her bundle first.
-        </p>
-    </div>
-</div>
+{% block brief_desc %}
+    <h2>Divide and Choose</h2>
+    <p>
+        Finds an item allocation for three people where one divides the items and gives the choice to his
+        peers.
+    </p>
+{% endblock %}
+
+{% block about_content %}
+    <h5 class="w3-padding-16">Finds an MMA1 allocation for 3 agents using approximate leximin
+        n-partition.</h5>
+    <p>
+        MMA1 - Maximin aware by one item. If everyone gets more than you, at least it's by one item
+        only.
+    </p>
+    <p>
+        A leximin n-partition maximizes the minimum value over all possible n partitions,
+        and if there is a tie it selects the one maximizing the second minimum value, and so on.
+    </p>
+    <hr>
+    <p class="w3-text-grey">
+        We use approximate version of leximin n-partition, where it maximizes the minimum sum value of a
+        bundle.
+    </p>
+{% endblock %}
+
+{% block how_content %}
+    <p>
+        Alice, Bob, and Claire have some items they want to share. Each values the items differently. <br>
+        First, Claire splits the items to 3 bundles, using approximate leximin-n-partition,
+        and lets Alice and Bob choose first. She keeps whatever is left after they decide. <br>
+        If there are any disputes among the two, Bob will split the bundles he prefers and
+        allow Alice to select her bundle first.
+    </p>
+{% endblock %}
+

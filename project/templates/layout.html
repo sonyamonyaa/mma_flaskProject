@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--suppress JSUnresolvedLibraryURL -->
+<html lang="en">
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!--fix "GET /favicon.ico HTTP/1.1" 404 -->
+    <link rel="shortcut icon" href="#">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Lato", sans-serif
+        }
+
+        h1, h2, button {
+            font-family: "Montserrat", sans-serif
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+    <div class="w3-center">
+        {% if sub_title %}
+            <p class="w3-xlarge">{{ sub_title }}</p>
+        {% endif %}
+        {% if head %}
+            <h1 class="w3-margin w3-jumbo w3-animate-bottom">{{ head }}</h1>
+        {% else %}
+            <h1 class="w3-margin w3-jumbo">Page Content</h1>
+        {% endif %}
+
+    </div>
+</header>
+
+{% block mycontents %}
+{% endblock %}
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-16 w3-theme-dark">
+    <div class="w3-center">
+        {#        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>#}
+        <i class="fa fa-github w3-hover-opacity"></i>
+    </div>
+
+    <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+        <span class="w3-text w3-theme-light w3-padding">Go To Top</span>
+        <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+    </div>
+</footer>
+
+<script>
+    // Tabs
+    function openAlgo(evt, cityName) {
+        var i;
+        var x = document.getElementsByClassName("algo");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        var activebtn = document.getElementsByClassName("testbtn");
+        for (i = 0; i < x.length; i++) {
+            activebtn[i].className = activebtn[i].className.replace(" w3-dark-grey", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-dark-grey";
+    }
+
+    var mybtn = document.getElementsByClassName("testbtn")[0];
+    mybtn.click();
+
+    // Accordions
+    function myAccFunc(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") === -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace("w3-theme", "w3-theme-light");
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace("w3-theme-light", "w3-theme");
+        }
+    }
+</script>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

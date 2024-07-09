@@ -1,0 +1,39 @@
+<div class="w3-container w3-padding-16">
+    {% block brief_desc %}
+    {% endblock %}
+
+    <div class="accordion" id={{ algo_id }}>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="about_{{ algo_id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#aboutContent_{{ algo_id }}" aria-expanded="false"
+                        aria-controls="aboutContent_{{ algo_id }}">
+                    About
+                </button>
+            </h2>
+            <div id="aboutContent_{{ algo_id }}" class="accordion-collapse collapse"
+                 aria-labelledby="about_{{ algo_id }}">
+                <div class="accordion-body">
+                    {% block about_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="how_{{ algo_id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#howContent_{{ algo_id }}" aria-expanded="false"
+                        aria-controls="howContent_{{ algo_id }}">
+                    How it Works
+                </button>
+            </h2>
+            <div id="howContent_{{ algo_id }}" class="accordion-collapse collapse"
+                 aria-labelledby="how_{{ algo_id }}">
+                <div class="accordion-body">
+                    {% block how_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
