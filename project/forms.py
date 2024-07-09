@@ -8,6 +8,6 @@ class InputForm(FlaskForm):
     algo_name = SelectField(label=u'Algorithm Name',
                             choices=[('', 'Select Algorithm Name'), ('div', 'Divide and Choose'),
                                      ('alloc', 'Allocation by Matching')])
-    participants = StringField(label='Participants (comma-separated)', validators=[DataRequired()])
-    items = StringField(label='Items (comma-separated)', validators=[DataRequired()])
+    participants = StringField(label='2-6 participants (comma-separated)', validators=[DataRequired()])
+    items = StringField(label='2-15 items (comma-separated)', validators=[DataRequired()])
     submit = SubmitField('Update')

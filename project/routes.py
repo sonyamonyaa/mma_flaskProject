@@ -5,6 +5,7 @@ from project.forms import InputForm
 from fairpyx import divide
 from project import maximin_aware as mma
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     input_form = InputForm()
@@ -20,10 +21,10 @@ def index():
         if algo_name == '':
             flash('Please select an algorithm', category='danger')
         if algo_name == 'div' and len(participants) != 3:
-            flash('You must choose 3 participants to use Divide and Choose', category='danger')
-        if algo_name != '' and len(participants) <= 1:
-            flash('Put more than one participant', category='danger')
-        if algo_name != '' and len(items) > 0 and len(participants) > 1:
+            flash('You must put 3 participants to use Divide and Choose', category='danger')
+        if algo_name != '' and not (2 <= len(participants) <= 6):
+            flash('Put between 2 and 6 participants', category='danger')
+        if algo_name != '' and (2 <= len(items) <= 15) and  (2 <= len(participants) <= 6):
             flash('Please put below valuations of each', category='success')
 
         errors = get_flashed_messages(category_filter=['danger'])
@@ -60,12 +61,14 @@ def submit():
             field_name = f'{participant}_{item}'
             res = request.form.get(field_name)
             value = 0 if res is None else int(res)
-            print(f"value: {value}")
+            # print(f"value: {value}")
             submitted_data[participant][item] = value
             participant_total += value
 
         if participant_total == 0:
-            flash(f'All Values for {participant} are 0, either add valuations or remove {participant} from participants', category='danger')
+            flash(
+                f'All Values for {participant} are 0, either add valuations or remove {participant} from participants',
+                category='danger')
             return redirect(f"{url_for('index')}#form-section")
     # For debugging: Output the received submitted_data
     print(f" submitted_data {submitted_data}")
@@ -75,6 +78,5 @@ def submit():
         allocation = divide(algorithm=mma.alloc_by_matching, valuations=submitted_data)
     else:
         allocation = {}
-
 
     return render_template('output.html', algo_name=algo_name, submitted_data=submitted_data, allocation=allocation)
