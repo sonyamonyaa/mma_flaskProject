@@ -40,7 +40,7 @@ def index():
         print(f"Items: {items}")
         print(f"Algo name: {algo_name}")
 
-    return render_template('base.html', input_form=input_form, participants=participants,
+    return render_template('index.html', input_form=input_form, participants=participants,
                            items=items, algo_name=algo_name)
 
 
