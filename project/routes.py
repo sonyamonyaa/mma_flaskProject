@@ -20,11 +20,13 @@ def index():
         items = [i.strip() for i in input_form.items.data.split(',') if i.strip()]
         if algo_name == '':
             flash('Please select an algorithm', category='danger')
-        if algo_name == 'div' and len(participants) != 3:
-            flash('You must put 3 participants to use Divide and Choose', category='danger')
-        if algo_name != '' and not (2 <= len(participants) <= 6):
+        elif not (2 <= len(participants) <= 6):
             flash('Put between 2 and 6 participants', category='danger')
-        if algo_name != '' and (2 <= len(items) <= 15) and  (2 <= len(participants) <= 6):
+        elif not (2 <= len(items) <= 15):
+            flash('Put between 2 and 15 items', category='danger')
+        elif algo_name == 'div' and len(participants) != 3:
+            flash('You must put 3 participants to use Divide and Choose', category='danger')
+        elif (2 <= len(items) <= 15) and  (2 <= len(participants) <= 6):
             flash('Please put below valuations of each', category='success')
 
         errors = get_flashed_messages(category_filter=['danger'])
@@ -61,7 +63,7 @@ def submit():
             field_name = f'{participant}_{item}'
             res = request.form.get(field_name)
             value = 0 if res is None else int(res)
-            # print(f"value: {value}")
+
             submitted_data[participant][item] = value
             participant_total += value
 

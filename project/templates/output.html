@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
-{% set sub_title= "Results" %}
+{% set Title = "MMA Output" %}
+
+{% set sub_title= "Algorithm Results" %}
 {% if algo_name == "div" %}
     {% set head = "Divide and Choose" %}
 {% elif algo_name == "alloc" %}
     {% set head = "Allocation by Matching" %}
 {% endif %}
+
 
 
 {% block mycontents %}

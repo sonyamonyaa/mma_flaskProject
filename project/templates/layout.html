@@ -2,7 +2,7 @@
 <!--suppress JSUnresolvedLibraryURL -->
 <html lang="en">
 <head>
-    <title>W3.CSS Template</title>
+    <title>{{ Title }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -46,14 +46,18 @@
     </div>
 </header>
 <div>
-{% block mycontents %}
-{% endblock %}
+    {% block mycontents %}
+    {% endblock %}
 </div>
 <!-- Footer -->
 <footer class="w3-container w3-padding-16 w3-theme-dark">
-    <div class="w3-center">
+    <div class="w3-tooltip w3-center">
         {#        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>#}
-        <i class="fa fa-github w3-hover-opacity"></i>
+
+        <a class="w3-text-white"
+           href="https://github.com/ariel-research/fairpyx/blob/main/fairpyx/algorithms/maximin_aware.py">
+            <span class="w3-xlarge"><i class="fa fa-github w3-hover-opacity"></i></span>
+        </a>
     </div>
 
     <div style="position:relative;bottom:25px;" class="w3-tooltip w3-right">
