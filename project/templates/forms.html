@@ -6,11 +6,11 @@
     </div>
     <div class="w3-margin-bottom">
         <label>{{ input_form.participants.label }}</label>
-        {{ input_form.participants(class='w3-input w3-border') }}
+        {{ input_form.participants(class='w3-input w3-border', placeholder='Alice, Bob, ...') }}
     </div>
     <div class="w3-margin-bottom">
         <label>{{ input_form.items.label }}</label>
-        {{ input_form.items(class='w3-input w3-border') }}
+        {{ input_form.items(class='w3-input w3-border', placeholder='Item1, Item2, ...') }}
     </div>
     {{ input_form.submit(class="w3-button w3-theme-dark w3-margin-bottom") }}
 </form>

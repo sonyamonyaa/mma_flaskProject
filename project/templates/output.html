@@ -1,56 +1,61 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Submitted Data</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-<body>
-<div class="w3-container">
-    <h2>Submitted Data for Algorithm: {{ algo_name }}</h2>
+{% extends "layout.html" %}
 
-    <!-- Display submitted data -->
-    <table class="w3-table w3-bordered">
-        <thead>
-        <tr>
-            <th>Participant</th>
-            {% for item in submitted_data[submitted_data|first].keys() %}
-                <th>{{ item }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for participant, items in submitted_data.items() %}
-            <tr>
-                <td>{{ participant }}</td>
-                {% for item, valuation in items.items() %}
-                    <td>{{ valuation }}</td>
+{% set sub_title= "Results" %}
+{% if algo_name == "div" %}
+    {% set head = "Divide and Choose" %}
+{% elif algo_name == "alloc" %}
+    {% set head = "Allocation by Matching" %}
+{% endif %}
+
+
+{% block mycontents %}
+    <div class="w3-container w3-section">
+        <div class="w3-container w3-padding-large">
+            <h2>Submitted Data for Algorithm</h2>
+
+            <!-- Display submitted data -->
+            <table class="w3-table w3-bordered w3-striped w3-card">
+                <thead>
+                <tr class="w3-theme-d1">
+                    <th>Participant</th>
+                    {% for item in submitted_data[submitted_data|first].keys() %}
+                        <th class="w3-center">{{ item }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for participant, items in submitted_data.items() %}
+                    <tr>
+                        <td>{{ participant }}</td>
+                        {% for item, valuation in items.items() %}
+                            <td class="w3-center">{{ valuation }}</td>
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div class="w3-container">
-    <h2>Result for Algorithm: {{ algo_name }}</h2>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Display submitted data -->
-    <table class="w3-table w3-bordered">
-        <thead>
-        <tr>
-            <th>Participant</th>
-            <th>Items</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for participant, items in allocation.items() %}
-            <tr>
-                <td>{{ participant }}</td>
-                <td> {{ items | join(', ') }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+        <div class="w3-container w3-padding-large">
+            <h2>Final allocation</h2>
+
+            <!-- Display submitted data -->
+            <table class="w3-table w3-bordered w3-striped w3-card">
+                <thead>
+                <tr class="w3-theme-d1">
+                    <th>Participant</th>
+                    <th>Items</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participant, items in allocation.items() %}
+                    <tr>
+                        <td>{{ participant }}</td>
+                        <td> {{ items | join(', ') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
