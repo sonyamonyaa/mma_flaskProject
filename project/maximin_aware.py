@@ -114,7 +114,7 @@ def divide_and_choose_for_three(alloc: AllocationBuilder, explanation_logger: Ex
     def _(code: str):
         return TEXT[code][explanation_logger.language]
 
-    check_no_capacities(alloc.instance, algo_prefix="divide and choose: ") # check that capacites are not used.
+    check_no_capacities(alloc.instance, algo_prefix="divide and choose: ")  # check that capacites are not used.
 
     agents = list(alloc.remaining_agents())
     if len(agents) != 3:
@@ -185,8 +185,8 @@ def divide_and_choose_for_three(alloc: AllocationBuilder, explanation_logger: Ex
     # Step 4: Second favorite bundles are different
     # checking significant worth of second bundle: 2 * #2-bundle > #1-bundle + #3-bundle
     explanation_logger.info("\n(4) " + _("different_second_priority"))
-    is_significant1 = is_significant_2nd_bundle(alloc.agent_bundle_value, agents[0], priorities1)
-    is_significant2 = is_significant_2nd_bundle(alloc.agent_bundle_value, agents[1], priorities2)
+    is_significant1 = is_significant_2nd_bundle(alloc.instance.agent_bundle_value, agents[0], priorities1)
+    is_significant2 = is_significant_2nd_bundle(alloc.instance.agent_bundle_value, agents[1], priorities2)
     if is_significant1 and is_significant2:
         # Step 4-a: Second favorite bundles have significant worth for both
         #  Each agent among the first two take their second favorite bundle, the remaining bundle goes to third agent
@@ -377,7 +377,7 @@ def approx_leximin_partition(valuation: dict, n: int = 3, result: out.OutputType
     return prt
 
 
-def get_bundle_rankings(agent_bundle_value:callable, agent, bundles: list) -> list:
+def get_bundle_rankings(agent_bundle_value: callable, agent, bundles: list) -> list:
     """
     checks the ranking of bundles according to agent's preferences
     :param instance: the current instance
@@ -401,7 +401,7 @@ def get_bundle_rankings(agent_bundle_value:callable, agent, bundles: list) -> li
     return ranking
 
 
-def is_significant_2nd_bundle(agent_bundle_value:callable, agent, bundles: list) -> bool:
+def is_significant_2nd_bundle(agent_bundle_value: callable, agent, bundles: list) -> bool:
     """
     checks the significance of the second priority bundle of an agent
 
@@ -417,7 +417,7 @@ def is_significant_2nd_bundle(agent_bundle_value:callable, agent, bundles: list)
     True
     """
     return (agent_bundle_value(agent, bundles[1]) * 2) > agent_bundle_value(agent, bundles[0]) \
-           + agent_bundle_value(agent, bundles[2])
+        + agent_bundle_value(agent, bundles[2])
 
 
 # ----------------------------------------------------------
@@ -479,7 +479,7 @@ def create_envy_graph(instance: Instance, allocation: dict,
 
 
 def envy_reduction_procedure(alloc: dict[str, list], instance: Instance,
-                             explanation_logger: ExplanationLogger = ExplanationLogger())->list:
+                             explanation_logger: ExplanationLogger = ExplanationLogger()) -> list:
     """
     Procedure P for algo. 2: builds an envy graph from a given allocation, finds and reduces envy cycles.
     i.e. allocations with envy-cycles should and would be fixed here.
@@ -596,11 +596,13 @@ def maximum_matching(instance: Instance, agents: list, items: list):
 
 if __name__ == "__main__":
     import doctest
+
     print("\n", doctest.testmod(), "\n")
     # sys.exit()
 
     from fairpyx import ConsoleExplanationLogger
     from fairpyx.adaptors import divide_random_instance
+
     console_explanation_logger = ConsoleExplanationLogger()
 
     # inst = Instance(
@@ -624,11 +626,11 @@ if __name__ == "__main__":
     #                 "Claire": [2, 8, 8, 7]})
     # alloc = divide(alloc_by_matching, inst, explanation_logger=console_explanation_logger)
 
-    # inst = Instance(  # exemplifies an envy-cycle
-    #     valuations={"Alice": [57, 34, 22, 19, 14, 6],
-    #                 "Bob": [59, 34, 26, 17, 14, 2]})
-    # alloc = divide(alloc_by_matching, inst, explanation_logger=console_explanation_logger)
-
+    inst = Instance(  # exemplifies an envy-cycle
+        valuations={"Alice": {"c1": 57, "c2": 34, "c3": 22, "c4": 19, "c5": 14, "c6": 6},
+                    "Bob": {"c1": 59, "c2": 34, "c3": 26, "c4": 17, "c5": 14, "c6": 2}})
+    alloc = divide(alloc_by_matching, inst)
+    print(alloc)
 
     # num_of_agents = 3
     # num_of_items = 19

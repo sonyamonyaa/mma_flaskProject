@@ -48,13 +48,17 @@
                 <tr class="w3-theme-d1">
                     <th>Participant</th>
                     <th>Items</th>
+                    <th class="w3-center">Value</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for participant, items in allocation.items() %}
+                {% for participant, data in allocation.items() %}
                     <tr>
                         <td>{{ participant }}</td>
-                        <td> {{ items | join(', ') }}</td>
+                        <td>
+                            {{ data['items']|join(', ') }}
+                        </td>
+                        <td class="w3-center">{{ data['value'] }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

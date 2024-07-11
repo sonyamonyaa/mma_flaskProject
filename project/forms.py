@@ -10,4 +10,5 @@ class InputForm(FlaskForm):
                                      ('alloc', 'Allocation by Matching')])
     participants = StringField(label='2-6 participants (comma-separated)', validators=[DataRequired()])
     items = StringField(label='2-15 items (comma-separated)', validators=[DataRequired()])
-    submit = SubmitField('Update')
+    submit = SubmitField(label='Generate empty form')
+    generate = SubmitField(label='Generate filled form',name='generate_random', id='generate_random')

@@ -13,6 +13,7 @@
         {{ input_form.items(class='w3-input w3-border', placeholder='Item1, Item2, ...') }}
     </div>
     {{ input_form.submit(class="w3-button w3-theme-dark w3-margin-bottom") }}
+    {{ input_form.generate(class="w3-button w3-theme-dark w3-margin-bottom") }}
 </form>
 
 
@@ -52,12 +53,13 @@
                              aria-labelledby="p_{{ participant }}">
                             {% for item in items %}
                                 <div class="w3-row w3-margin" style="display: flex; align-items: center;">
-                                    <div class="w3-col s3 m2 l2 w3-large w3-center" >
+                                    <div class="w3-col s3 m2 l2 w3-large w3-center">
                                         <label for="{{ participant }}_{{ item }}">{{ item }}</label>
                                     </div>
                                     <div class="w3-col s9 m10 l10">
                                         <input type="number" name="{{ participant }}_{{ item }}"
-                                               class="w3-input w3-border w3-large" min="0" required>
+                                               class="w3-input w3-border w3-large" min="0" required
+                                        value="{{ random_values.get(participant, {}).get(item,'') }}">
                                     </div>
                                 </div>
                             {% endfor %}

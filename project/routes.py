@@ -2,22 +2,28 @@ import os
 from flask import render_template, request, flash, redirect, url_for, get_flashed_messages
 from project import app
 from project.forms import InputForm
-from fairpyx import divide
+from fairpyx import divide, Instance
 from project import maximin_aware as mma
-
+import random
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    input_form = InputForm()
+    # Init. input form with some example values
+    input_form = InputForm(algo_name='', participants='Alice, Bob, Claire', items='Item1, Item2, Item3, Item4')
 
     participants = []
     items = []
     algo_name = ''
+    random_values = {}
 
     if input_form.validate_on_submit():
         algo_name = input_form.algo_name.data
         participants = [p.strip() for p in input_form.participants.data.split(',') if p.strip()]
         items = [i.strip() for i in input_form.items.data.split(',') if i.strip()]
+
+        if request.form.get('generate_random'):
+            random_values = {participant: {item: random.randint(1, 100) for item in items} for participant in participants}
+
         if algo_name == '':
             flash('Please select an algorithm', category='danger')
         elif not (2 <= len(participants) <= 6):
@@ -26,7 +32,7 @@ def index():
             flash('Put between 2 and 15 items', category='danger')
         elif algo_name == 'div' and len(participants) != 3:
             flash('You must put 3 participants to use Divide and Choose', category='danger')
-        elif (2 <= len(items) <= 15) and  (2 <= len(participants) <= 6):
+        elif (2 <= len(items) <= 15) and (2 <= len(participants) <= 6):
             flash('Please put below valuations of each', category='success')
 
         errors = get_flashed_messages(category_filter=['danger'])
@@ -43,7 +49,7 @@ def index():
         print(f"Algo name: {algo_name}")
 
     return render_template('index.html', input_form=input_form, participants=participants,
-                           items=items, algo_name=algo_name)
+                           items=items, algo_name=algo_name, random_values=random_values)
 
 
 # Route for submitting the values for each participant and their items
@@ -75,10 +81,20 @@ def submit():
     # For debugging: Output the received submitted_data
     print(f" submitted_data {submitted_data}")
     if algo_name == 'div':
-        allocation = divide(algorithm=mma.divide_and_choose_for_three, valuations=submitted_data)
+        allocation = get_allocation(algorithm=mma.divide_and_choose_for_three, valuations=submitted_data,
+                                    participants=participants)
     elif algo_name == 'alloc':
-        allocation = divide(algorithm=mma.alloc_by_matching, valuations=submitted_data)
+        allocation = get_allocation(algorithm=mma.alloc_by_matching, valuations=submitted_data,
+                                    participants=participants)
     else:
         allocation = {}
 
     return render_template('output.html', algo_name=algo_name, submitted_data=submitted_data, allocation=allocation)
+
+
+def get_allocation(algorithm: callable, valuations: dict[str, dict[str, str]], participants: list):
+    instance = Instance(valuations=valuations)
+    result = divide(algorithm=algorithm, instance=instance)
+    allocation = {participant: {'items': items, 'value': instance.agent_bundle_value(participant, result[participant])}
+                  for participant, items in result.items()}
+    return allocation
