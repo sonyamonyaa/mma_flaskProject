@@ -310,7 +310,10 @@ def alloc_by_matching(alloc: AllocationBuilder, explanation_logger=ExplanationLo
         new_alloc = {a: bundle + [item]
                      for agent, bundle in alloc_dict.items()
                      for a, item in matching if a == agent}
-        # explanation_logger.debug(_("new_alloc"), new_alloc)
+
+        for a, bundle in new_alloc.items():
+            explanation_logger.info("last item added: %s, current allocation: %s", bundle[-1], str(bundle), agents=a)
+
         alloc_dict.update(new_alloc)
         explanation_logger.debug(_("updated_alloc"), alloc_dict)
         # and exclude j from R: R = R\{j}.
@@ -555,6 +558,8 @@ def envy_reduction_procedure(alloc: dict[str, list], instance: Instance,
         explanation_logger.info(_("envy_cycle"))
         explanation_logger.debug("\t" + _("reassignment_for"), envy_cycle)
         new_alloc = {envious: alloc[envied] for envious, envied in envy_cycle}
+        for a, bundle in new_alloc.items():
+            explanation_logger.info("reassigned bundle in envy cycle: %s", str(bundle),  agents=a)
         explanation_logger.debug("\t" + _("new_alloc"), new_alloc)
         alloc.update(new_alloc)
         envy_graph = create_envy_graph(instance, alloc, explanation_logger)

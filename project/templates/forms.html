@@ -30,7 +30,8 @@
 {% if participants and items %}
     <div class="w3-container w3-padding w3-center" id="add-values">
         <h3 class="w3-margin-top w3-center">Valuations</h3>
-        <p> Fill values for each item for every participant, and submit below </p>
+        <p> Enter values ranging from 0 to 100 for each item for every participant, and submit below.
+            Ensure that no participant has only zeros. </p>
         <form method="POST" action="{{ url_for('submit') }}">
 
             <input type="hidden" name="algo_name" value="{{ algo_name }}">
@@ -58,7 +59,7 @@
                                     </div>
                                     <div class="w3-col s9 m10 l10">
                                         <input type="number" name="{{ participant }}_{{ item }}"
-                                               class="w3-input w3-border w3-large" min="0" required
+                                               class="w3-input w3-border w3-large" min="0" max="100" required
                                         value="{{ random_values.get(participant, {}).get(item,'') }}">
                                     </div>
                                 </div>

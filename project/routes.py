@@ -1,3 +1,4 @@
+import logging
 import os
 from flask import render_template, request, flash, redirect, url_for, get_flashed_messages
 from project import app
@@ -81,20 +82,35 @@ def submit():
     # For debugging: Output the received submitted_data
     print(f" submitted_data {submitted_data}")
     if algo_name == 'div':
-        allocation = get_allocation(algorithm=mma.divide_and_choose_for_three, valuations=submitted_data,
+        allocation, logs = get_allocation(algorithm=mma.divide_and_choose_for_three, valuations=submitted_data,
                                     participants=participants)
     elif algo_name == 'alloc':
-        allocation = get_allocation(algorithm=mma.alloc_by_matching, valuations=submitted_data,
+        allocation, logs = get_allocation(algorithm=mma.alloc_by_matching, valuations=submitted_data,
                                     participants=participants)
     else:
-        allocation = {}
+        allocation, logs = {}, {}
 
-    return render_template('output.html', algo_name=algo_name, submitted_data=submitted_data, allocation=allocation)
+    return render_template('output.html', algo_name=algo_name, submitted_data=submitted_data,
+                           allocation=allocation, logs=logs)
 
 
 def get_allocation(algorithm: callable, valuations: dict[str, dict[str, str]], participants: list):
+    import numpy as np
+    from fairpyx import explanations, AgentBundleValueMatrix
+    logger = explanations.StringsExplanationLogger(agents=participants, level=logging.INFO)
     instance = Instance(valuations=valuations)
-    result = divide(algorithm=algorithm, instance=instance)
+    result = divide(algorithm=algorithm, instance=instance, explanation_logger=logger)
     allocation = {participant: {'items': items, 'value': instance.agent_bundle_value(participant, result[participant])}
                   for participant, items in result.items()}
-    return allocation
+
+    logs = logger.map_agent_to_explanation()
+
+    for agent, log in logs.items():
+        absolute_value = instance.agent_bundle_value(agent, result[agent])
+        maximum_value = instance.agent_maximum_value(agent) / instance.num_of_agents
+        relative_value = absolute_value / maximum_value * 100
+        true_capacity = int(np.ceil(instance.num_of_items/instance.num_of_agents))
+        new_summary = (f'\nIn term of item allocation, your bundle is worth {int(np.round(relative_value))}% of the average value '
+                       f'of {true_capacity} items.')
+        logs[agent] += new_summary
+    return allocation, logs
