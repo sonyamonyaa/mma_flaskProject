@@ -45,9 +45,9 @@ def index():
             algo_name = ''
 
         # For debugging: Output the participants and items
-        print(f"Participants: {participants}")
-        print(f"Items: {items}")
-        print(f"Algo name: {algo_name}")
+        # print(f"Participants: {participants}")
+        # print(f"Items: {items}")
+        # print(f"Algo name: {algo_name}")
 
     return render_template('index.html', input_form=input_form, participants=participants,
                            items=items, algo_name=algo_name, random_values=random_values)
@@ -80,7 +80,7 @@ def submit():
                 category='danger')
             return redirect(f"{url_for('index')}#form-section")
     # For debugging: Output the received submitted_data
-    print(f" submitted_data {submitted_data}")
+    # print(f" submitted_data {submitted_data}")
     if algo_name == 'div':
         allocation, logs = get_allocation(algorithm=mma.divide_and_choose_for_three, valuations=submitted_data,
                                     participants=participants)

@@ -4,3 +4,4 @@ flask-wtf
 WTForms
 fairpyx
 prtpy
+numpy
